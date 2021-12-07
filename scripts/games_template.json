@@ -1,0 +1,36 @@
+{
+    "sportsfeeds": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "PK": {"S":"game-2957FB14-2939-4A7C-BC54-331D65EE7D58"},
+                    "SK": {"S":"game-soccer"},
+                    "CREATED": {"N":"{TIME}"},
+                    "GAMEDATE": {"N":"{TIME}"},
+                    "ISSCHEDULED": {"S":"Y"},
+                    "STATUS": {"S":"scheduled"},
+                    "VENUE": {"S":"Wembley Stadium"},
+                    "NAME": {"S":"World Cup Qualifier"},
+                    "SEASON": {"S":"2021"},
+                    "TYPE": {"S":"regular"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "PK": {"S":"game-CC39FC2A-8CD7-44F7-91EA-585D441BDDAF"},
+                    "SK": {"S":"game-soccer"},
+                    "CREATED": {"N":"{TIME}"},
+                    "GAMEDATE": {"N":"{TIME}"},
+                    "ISSCHEDULED": {"S":"Y"},
+                    "STATUS": {"S":"scheduled"},
+                    "VENUE": {"S":"Wembley Stadium"},
+                    "NAME": {"S":"World Cup Qualifier"},
+                    "SEASON": {"S":"2021"},
+                    "TYPE": {"S":"regular"}
+                }
+            }
+        }
+    ]
+}

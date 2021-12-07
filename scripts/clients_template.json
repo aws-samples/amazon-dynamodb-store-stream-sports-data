@@ -1,0 +1,24 @@
+{
+    "sportsfeeds": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "PK": {"S":"client-001"},
+                    "SK": {"S":"cli-name1"},
+                    "CREATED": {"N":"{TIME}"},
+                    "ACTIVE": {"S":"Y"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "PK": {"S":"client-002"},
+                    "SK": {"S":"cli-name2"},
+                    "CREATED": {"N":"{TIME}"},
+                    "ACTIVE": {"S":"Y"}
+                }
+            }
+        }
+    ]
+}

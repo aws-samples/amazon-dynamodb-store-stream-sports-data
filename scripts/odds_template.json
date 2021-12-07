@@ -1,0 +1,28 @@
+{
+    "odds": [
+        {
+            "summary": "Portland Trail Blazers @ Charlotte Hornets",
+            "gameId": "game-2957FB14-2939-4A7C-BC54-331D65EE7D58",
+            "gameDate": "2019-03-03 13:00:00.000",
+            "type": "spread",
+            "isOpen": true,
+            "away": {AWAY},
+            "home": {HOME},
+            "awayOdds": -110,
+            "homeOdds": -110,
+            "date": TIME
+        },
+        {
+            "summary": "Portland Trail Blazers @ Charlotte Hornets",
+            "gameId": "game-CC39FC2A-8CD7-44F7-91EA-585D441BDDAF",
+            "gameDate": "2019-03-03 13:00:00.000",
+            "type": "spread",
+            "isOpen": true,
+            "away": {AWAY},
+            "home": {HOME},
+            "awayOdds": -110,
+            "homeOdds": -110,
+            "date": TIME
+        }
+    ]
+}
