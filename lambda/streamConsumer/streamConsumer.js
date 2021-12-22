@@ -55,7 +55,7 @@ exports.handler = async (event) => {
   }
   return response
 }
-// scan for connections in the sparse GSI-CON
+// scan for connections in the sparse GSI-2
 async function findAllConnections() {
   try {
     var params = {
