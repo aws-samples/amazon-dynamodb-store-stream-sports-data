@@ -46,7 +46,7 @@ Figure 1 illustrates the solution architecture and the two flows described above
 <br />
 To learn more about how this application works, review the Amazon DynamoDB Blog:
 
-* [Store & Stream sports data feeds using Amazon DynamoDB and Amazon Kinesis Data Streams](https://aws.amazon.com/blogs)
+* [Store & Stream sports data feeds using Amazon DynamoDB and Amazon Kinesis Data Streams](https://aws.amazon.com/blogs/database/store-and-stream-sports-data-feeds-using-amazon-dynamodb-and-amazon-kinesis-data-streams/)
 
 Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the AWS Pricing page for details. You are responsible for any AWS costs incurred. No warranty is implied in this example.
 
