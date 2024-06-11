@@ -1,19 +1,20 @@
-import * as cdk from "@aws-cdk/core"
-import * as kinesis from "@aws-cdk/aws-kinesis"
-import * as lambda from "@aws-cdk/aws-lambda"
-import { PolicyStatement } from "@aws-cdk/aws-iam"
-import * as lambdaEventSources from "@aws-cdk/aws-lambda-event-sources"
-import { Cors, RestApi, LambdaIntegration } from "@aws-cdk/aws-apigateway"
-import { AttributeType, Table, BillingMode } from "@aws-cdk/aws-dynamodb"
-import * as dynamodb from "@aws-cdk/aws-dynamodb"
-import { RemovalPolicy, Duration } from "@aws-cdk/core"
-import { WebSocketApi, WebSocketStage } from "@aws-cdk/aws-apigatewayv2"
-import { LambdaWebSocketIntegration } from "@aws-cdk/aws-apigatewayv2-integrations"
-import { CfnStreamConsumer } from '@aws-cdk/aws-kinesis';
-import { EventSourceMapping, StartingPosition } from '@aws-cdk/aws-lambda'
+import * as cdk from "aws-cdk-lib"
+import * as kinesis from "aws-cdk-lib/aws-kinesis"
+import * as lambda from "aws-cdk-lib/aws-lambda"
+import { PolicyStatement } from "aws-cdk-lib/aws-iam"
+import { Cors, RestApi, LambdaIntegration } from "aws-cdk-lib/aws-apigateway"
+import { AttributeType, Table, BillingMode } from "aws-cdk-lib/aws-dynamodb"
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb"
+import { RemovalPolicy, Duration } from "aws-cdk-lib/core"
+import { WebSocketApi, WebSocketStage } from "aws-cdk-lib/aws-apigatewayv2"
+import * as apigw2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { CfnStreamConsumer } from 'aws-cdk-lib/aws-kinesis';
+import { EventSourceMapping, StartingPosition } from 'aws-cdk-lib/aws-lambda'
+import { Construct } from 'constructs'
+
 
 export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
@@ -54,7 +55,7 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
       code: lambda.Code.fromAsset("lambda/writeFeeds"),
       handler: "writeFeeds.handler",
       functionName: "writeFeeds",
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       memorySize: 256,
       environment : { "TABLE_NAME" : tableName, "REGION" : region } 
     })
@@ -65,7 +66,7 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
       code: lambda.Code.fromAsset("lambda/readFeeds"),
       handler: "readFeeds.handler",
       functionName: "readFeeds",
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       memorySize: 256,
       environment : { "TABLE_NAME" : tableName, "REGION" : region }
     })
@@ -76,7 +77,7 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
       code: lambda.Code.fromAsset("lambda/connectionManager"),
       handler: "connectionManager.handler",
       functionName: "connectionManager",
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       memorySize: 256,
       environment : { "TABLE_NAME" : tableName, "REGION" : region }
     })
@@ -91,7 +92,7 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
       code: lambda.Code.fromAsset("lambda/streamConsumer"),
       handler: "streamConsumer.handler",
       functionName: "streamConsumer",
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       memorySize: 256,
       environment : { "TABLE_NAME" : tableName, "REGION" : region }
     })
@@ -123,19 +124,13 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
 
     const webSocketApi = new WebSocketApi(this, "bookmakerAPI", {
       connectRouteOptions: {
-        integration: new LambdaWebSocketIntegration({
-          handler: connectionManager,
-        }),
+        integration:  new apigw2Integrations.WebSocketLambdaIntegration('ws-connect',connectionManager),
       },
       disconnectRouteOptions: {
-        integration: new LambdaWebSocketIntegration({
-          handler: connectionManager,
-        }),
+        integration: new apigw2Integrations.WebSocketLambdaIntegration( 'ws-disconnect', connectionManager),
       },
       defaultRouteOptions: {
-        integration: new LambdaWebSocketIntegration({
-          handler: connectionManager,
-        }),
+        integration: new apigw2Integrations.WebSocketLambdaIntegration('ws-default',connectionManager),
       },
     })
 
