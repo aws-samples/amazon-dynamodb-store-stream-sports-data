@@ -86,7 +86,7 @@ npm install -g aws-cdk
 
 cdk --version
 
-npm install --save-exact @aws-cdk/aws-lambda @aws-cdk/aws-lambda-nodejs @aws-cdk/aws-dynamodb @aws-cdk/aws-apigatewayv2 @aws-cdk/aws-kinesis @aws-cdk/aws-apigatewayv2-integrations @aws-cdk/aws-lambda-event-sources
+npm install 
 ```
 3. Configure AWS Access Key and Secret Access Key:
 ```
