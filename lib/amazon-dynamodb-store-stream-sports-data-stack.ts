@@ -92,7 +92,7 @@ export class AmazonDynamodbStoreStreamSportsDataStack extends cdk.Stack {
       code: lambda.Code.fromAsset("lambda/streamConsumer"),
       handler: "streamConsumer.handler",
       functionName: "streamConsumer",
-      runtime: lambda.Runtime.NODEJS__X,
+      runtime: lambda.Runtime.NODEJS_16_X,
       memorySize: 256,
       environment : { "TABLE_NAME" : tableName, "REGION" : region }
     })
